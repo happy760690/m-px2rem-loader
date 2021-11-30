@@ -18,19 +18,36 @@ module.exports = {
         // modules: ['loaders', 'node_modules'] // method 2, The node_modules option must be added, or the other loaders cannot be found
     },
     module: {
-        rules: [{
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader:'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-env', 
+                            '@babel/preset-react']
+                    }
+                }]
+            }
+            ,{
             test: /\.css$/,
             use: [
                 'style-loader',
-                'css-loader',{
-                    // loader: 'm-px2rem-loader',
+                'css-loader',
+                {
+                    // loader: 'px2rem-loader',
                     loader: mPx2remLoaderPath, // method 3 
                     options: {
                         remUnit: 75,
-                        remPrecision: 8
+                        remPrecision: 8,
+                        exclude: /antd\.css/
                     }
-                }]
-        }]
+                }
+            ]
+            },
+        ]
     },
     plugins: [
         new htmlWebpackPlugin({

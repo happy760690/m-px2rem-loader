@@ -7,9 +7,15 @@ class Px2rem {
     }
     generateRem(csstext) {
         const processRules = (rules) => {
+            if(rules && !rules.length){
+                return 
+            }
             for (let i = 0; i < rules.length; i++) {
                 let rule = rules[i];
                 let declarations = rule.declarations;
+                if(!declarations){
+                    continue;
+                }
                 for (let j = 0; j < declarations.length; j++) {
                     let declaration = declarations[j];
                     if(declaration.type === 'declaration' && pxRegExp.test(declaration.value)){

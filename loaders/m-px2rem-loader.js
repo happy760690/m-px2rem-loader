@@ -10,9 +10,12 @@ let loaderUtils = require('loader-utils');
  * 
  * After being processed by the loader, the result is returned to the next loader or webpack
  */
-function loader(source,tt){
+function loader(source){
     // The parameter object configured by the user in webpack.config.js can be obtained through the getoptions method
     let options = loaderUtils.getOptions(this); // we can get { remUnit: 75, remPrecision: 8 }
+    if(options.exclude && options.exclude.test(this.resource)){ // this.resource is the absolute path of the module currently being converted
+        return source;
+    }
     let px2rem = new Px2rem(options);
     let targetSource = px2rem.generateRem(source); // Get the compiled style with rem
     return targetSource
