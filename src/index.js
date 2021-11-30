@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import './m-flexible';
-import './index.css';
+// import './m-flexible';
+import './index.css'; // inline loader  import 'px2rem-loader!./index.css'
 import 'antd/dist/antd.css';
 import {Button} from 'antd';
 
